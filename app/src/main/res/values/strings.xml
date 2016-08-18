@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PARX</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_refresh">Refresh</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invite_message">Hey! You can download PARX and inform the car you have blocked!</string>
+    <string name="version_number">Version %1$s</string>
+    <string name="closing_app">Closing the app"</string>
+    <string name="are_you_sure_to_close">Are you sure you want to close PARX?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="about">About</string>
+</resources>
