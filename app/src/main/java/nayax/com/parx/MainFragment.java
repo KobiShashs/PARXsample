@@ -35,7 +35,8 @@ public class MainFragment extends Fragment {
         DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 
-
+        //Enable toggle Button, should refactor code to check right Activity
+        ((MainActivity)this.getActivity()).EnableToggleButton(true);
     }
 
     @Override

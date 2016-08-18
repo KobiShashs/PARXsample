@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity
         //Set thr fragment initially
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MainFragment()).commit();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
 
 
@@ -42,14 +43,48 @@ public class MainActivity extends AppCompatActivity
 //
 //        listView.setAdapter(adapter);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mToggle.setToolbarNavigationClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private Toolbar mToolbar;
+    private DrawerLayout mDrawer;
+    private ActionBarDrawerToggle mToggle;
+    public void EnableToggleButton(boolean enabled)
+    {
+        if (enabled)
+        {
+            //enable
+            mDrawer.addDrawerListener(mToggle);
+            if (!mToggle.isDrawerIndicatorEnabled()) {
+                mToggle.setDrawerIndicatorEnabled(true);
+            }
+            mToggle.syncState();
+        }   else
+        {
+            //disable
+            mDrawer.removeDrawerListener(mToggle);
+            if (mToggle.isDrawerIndicatorEnabled()) {
+                mToggle.setDrawerIndicatorEnabled(false);
+
+                //enable home button
+                getSupportActionBar().setHomeButtonEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
     }
 
     @Override
@@ -97,6 +132,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
             return true;
+        } else if (id == android.R.id.home)
+        {
+            this.onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);

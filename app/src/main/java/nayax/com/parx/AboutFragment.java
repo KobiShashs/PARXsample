@@ -27,11 +27,11 @@ public class AboutFragment extends Fragment {
         super.onAttach(context);
     }
 
-    public void shouldDisplayHomeUp(){
+//    public void shouldDisplayHomeUp(){
         //Enable Up button only  if there are entries in the back stack
 //        boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
 
-    }
+//    }
 
     public AboutFragment() {
         // Required empty public constructor
@@ -51,20 +51,25 @@ public class AboutFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
         ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        if (actionBar!=null) {
-            actionBar.setTitle(getString(R.string.about));
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-        }
+//        if (actionBar!=null) {
+//            actionBar.setTitle(getString(R.string.about));
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setHomeButtonEnabled(true);
+//        }
         DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
+        //Enable toggle Button, should refactor code to check right Activity
+        ((MainActivity)this.getActivity()).EnableToggleButton(false);
     }
 
+    //Tri Nguyen: The back button is a child element of Toolbar (ActionBar) so under the parent Activity, not Fragment
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -77,8 +82,5 @@ public class AboutFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
-
+    */
 }
